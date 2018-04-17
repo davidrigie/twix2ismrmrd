@@ -58,7 +58,11 @@ def convert_all_files(inputdir, outputdir, donedir, **kwargs):
         donepath = form_output_path(inputpath, inputdir, donedir, '.dat')
         d = os.path.dirname(donepath)
         os.makedirs(d,exist_ok=True)
-        shutil.move(inputpath, d)
-                    
+        try:
+            shutil.move(inputpath, d)
+        except:
+            pass
+            
+        
     return True
  
