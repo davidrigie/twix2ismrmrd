@@ -17,7 +17,7 @@ ISMRMRD_OUTPUT_DIR  = /home/rigied01/test/test_output
 #________________________________________________#
 ```
 
-Then run the ```make``` to build the docker image and ```make start``` to run the container. It can also be run in an interactive mode with ```make shell```
+Then run ```make``` to build the docker image and ```make start``` to run the container. It can also be run in an interactive mode with ```make shell```
 
 Siemens raw MRI data files go in ```TWIX_INPUT_DIR```, and the resulting converted files will end up in ```ISMRMRD_OUTPUT_DIR```. The original .DAT files will be moved to ```DONE_DIR``` after they have been converted.  
 
