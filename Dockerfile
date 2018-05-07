@@ -41,4 +41,4 @@ ENV PATH=$PATH:$ISMRMRD_HOME/bin \
 RUN  apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT twixconvert /input_data /output_data /processed_data
+ENTRYPOINT twixconvert /input_data /output_data 2>> /logs/error_log.txt 1>> /logs/log.txt

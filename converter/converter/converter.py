@@ -6,6 +6,13 @@ import os
 import subprocess
 import datetime
 import shutil
+import traceback
+
+
+CONVERTED_FILES = dict()
+
+def eprint(*args, **kwargs):
+    tprint(*args, file=sys.stderr, **kwargs)
 
 def tprint(value, *args, **kwargs):
 
@@ -43,26 +50,27 @@ def form_output_path(inputpath, inputdir, outputdir, ext):
 
     return outputpath
 
-
-def convert_all_files(inputdir, outputdir, donedir, **kwargs):
+def convert_all_files(inputdir, outputdir,  **kwargs):
 
     pattern  = os.path.join(inputdir, '**', '*.dat')
     filelist = glob.glob(pattern, recursive=True)
 
     for inputpath in filelist:
-        outputpath = form_output_path(inputpath, inputdir, outputdir, '.h5')
-        tprint('Converting {}'.format(inputpath))
-        numMeasRead = convert_one_file(inputpath, outputpath, **kwargs)
-        tprint('\nDone.\n')
+        if (inputpath, os.stat(inputpath)) in CONVERTED_FILES:
+            continue
 
-        donepath = form_output_path(inputpath, inputdir, donedir, '.dat')
-        d = os.path.dirname(donepath)
-        os.makedirs(d,exist_ok=True)
         try:
-            shutil.move(inputpath, d)
-        except:
-            pass
-            
+            outputpath = form_output_path(inputpath, inputdir, outputdir, '.h5')
+            tprint('Converting {}'.format(inputpath))
+            numMeasRead = convert_one_file(inputpath, outputpath, **kwargs)
+            tprint('\nDone.\n')
+
+            CONVERTED_FILES[(inputpath, os.stat(inputpath))] = True
+        except Exception as exc:
+            eprint('Problem with file{}'.format(inputpath))
+            eprint(traceback.format_exc())
+
+
         
     return True
  
