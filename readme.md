@@ -11,15 +11,15 @@ Modify the following lines in ```config.env``` to point to the desired folder lo
 ##################################################
 #      Specify directories for input/output      #
 ##################################################
-TWIX_INPUT_DIR      = /home/rigied01/test/test_input
-DONE_DIR            = /home/rigied01/test/test_done
-ISMRMRD_OUTPUT_DIR  = /home/rigied01/test/test_output
+TWIX_INPUT_DIR      = /media/MRIScan/Working-Temp/TWIX_TO_ISMRMRD/input_twix
+ISMRMRD_OUTPUT_DIR  = /media/MRIScan/Working-Temp/TWIX_TO_ISMRMRD/output_ismrmrd
+LOG_DIR             = /media/MRIScan/Working-Temp/TWIX_TO_ISMRMRD/logs
 #________________________________________________#
 ```
 
 Then run ```make``` to build the docker image and ```make start``` to run the container. It can also be run in an interactive mode with ```make shell```
 
-Siemens raw MRI data files go in ```TWIX_INPUT_DIR```, and the resulting converted files will end up in ```ISMRMRD_OUTPUT_DIR```. The original .DAT files will be moved to ```DONE_DIR``` after they have been converted.  
+Siemens raw MRI data files go in ```TWIX_INPUT_DIR```, and the resulting converted files will end up in ```ISMRMRD_OUTPUT_DIR```.  
 
 ## Note
 
