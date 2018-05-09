@@ -50,17 +50,32 @@ def form_output_path(inputpath, inputdir, outputdir, ext):
 
     return outputpath
 
+def is_valid_input_file(filepath):
+    if "FBAI" in os.path.dirname(filepath):
+        return True
+
+    return False
+
 def convert_all_files(inputdir, outputdir,  **kwargs):
 
     pattern  = os.path.join(inputdir, '**', '*.dat')
     filelist = glob.glob(pattern, recursive=True)
 
     for inputpath in filelist:
+
+        if not is_valid_input_file(inputpath):
+            continue
+
         if (inputpath, os.stat(inputpath)) in CONVERTED_FILES:
             continue
 
         try:
             outputpath = form_output_path(inputpath, inputdir, outputdir, '.h5')
+            
+            if os.path.exists(outputpath):
+                tprint('HDF File already exists. Skipping...')
+                continue
+
             tprint('Converting {}'.format(inputpath))
             numMeasRead = convert_one_file(inputpath, outputpath, **kwargs)
             tprint('\nDone.\n')
