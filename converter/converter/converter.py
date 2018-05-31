@@ -51,10 +51,7 @@ def form_output_path(inputpath, inputdir, outputdir, ext):
     return outputpath
 
 def is_valid_input_file(filepath):
-    if "FBAI" in os.path.dirname(filepath):
-        return True
-
-    return False
+    return True
 
 def convert_all_files(inputdir, outputdir,  **kwargs):
 
