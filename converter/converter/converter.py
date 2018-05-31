@@ -60,6 +60,11 @@ def convert_all_files(inputdir, outputdir,  **kwargs):
 
     pattern  = os.path.join(inputdir, '**', '*.dat')
     filelist = glob.glob(pattern, recursive=True)
+    filelist.sort()
+
+    filelist = [p for p in filelist if is_valid_input_file(p)]
+
+    
 
     for inputpath in filelist:
 
